@@ -1,0 +1,80 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Виртуальные окружения
+venv/
+env/
+ENV/
+.venv
+.env
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Файлы с паролями и секретами
+*.secret
+*.key
+*.pem
+config.py
+secrets.py
+.password
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.bak
+*.cache
+
+# Данные PostgreSQL (если случайно появятся локально)
+*.db
+*.sqlite
+*.sqlite3
+
+# Файлы, созданные при загрузке данных (если есть)
+*_copy.csv
+*_backup.csv
+
+# Отчёты и временные JSON (если не хотите их в репозитории)
+temp_*.json
+debug_*.json
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Jupyter Notebook (если будете использовать)
+.ipynb_checkpoints/
+*.ipynb
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# pytest
+.pytest_cache/
+htmlcov/
+.tox/
+.coverage
+coverage.xml
+*.cover
+
+# Docker (если будете использовать позже)
+.dockerignore
+*.pid
