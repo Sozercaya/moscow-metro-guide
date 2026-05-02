@@ -130,6 +130,8 @@ cursor.execute("""
         place_type TEXT,
         description TEXT,
         walking_minutes INTEGER DEFAULT 0
+        activity_category VARCHAR(50),    
+        budget_category VARCHAR(50)       
     )
 """)
 
