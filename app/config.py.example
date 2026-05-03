@@ -1,0 +1,15 @@
+cat > app/config.py.example <<'EOF'
+# app/config.py.example
+# Файл-шаблон настроек. Скопируйте его в config.py и вставьте свои пароли.
+# config.py добавлен в .gitignore и не попадёт в репозиторий.
+
+DB_CONFIG = {
+    "dbname": "moscow_metro",
+    "user": "postgres",
+    "password": "ЗАМЕНИТЕ_НА_ВАШ_ПАРОЛЬ",  # ← Вставьте свой пароль
+    "host": "localhost",
+    "port": 5432
+}
+
+SECRET_KEY = "ЗАМЕНИТЕ_НА_СЛУЧАЙНУЮ_СТРОКУ"  # ← Придумайте секретный ключ
+EOF
