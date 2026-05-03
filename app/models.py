@@ -1,49 +1,69 @@
 # app/models.py
-# Работа с базой данных (Model в MVC)
+# Работа с базой данных PostgreSQL
 
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from .config import DB_CONFIG
 
+
 def get_db_connection():
-    """Подключается к PostgreSQL"""
     return psycopg2.connect(**DB_CONFIG)
 
+
 def get_all_stations():
-    """Все станции с информацией о линиях"""
+    """
+    Возвращает список всех станций метро.
+    Нужно для отображения карточек на главной странице.
+    """
     conn = get_db_connection()
-    cursor = conn.cursor(cursor_factory=RealDictCursor)
-    cursor.execute("""
-        SELECT s.id, s.name, s.fact, l.name as line_name
+    # RealDictCursor — чтобы результат был в виде словарей,
+    # а не списков. Удобно: row['name'] вместо row[1]
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+    
+    # JOIN — джойним станции и линии, чтобы получить название линии
+    # ORDER BY name — сортируем по алфавиту (так удобнее пользователю)
+    cur.execute("""
+        SELECT s.id, s.name, s.fact, 
+               l.id as line_id, l.name as line_name, l.color as line_color
         FROM stations s
         JOIN lines l ON s.line_id = l.id
         ORDER BY s.name
     """)
-    stations = cursor.fetchall()
-    cursor.close()
+    stations = cur.fetchall()
+    cur.close()
     conn.close()
     return stations
 
+
 def get_station_by_id(station_id):
-    """Станция по ID"""
+    """
+    Возвращает данные одной станции по её ID.
+    Используется в API: /api/station/4
+    """
     conn = get_db_connection()
-    cursor = conn.cursor(cursor_factory=RealDictCursor)
-    cursor.execute("""
-        SELECT s.id, s.name, s.fact, l.name as line_name
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+    cur.execute("""
+        SELECT s.id, s.name, s.fact, 
+               l.name as line_name, l.color as line_color
         FROM stations s
         JOIN lines l ON s.line_id = l.id
         WHERE s.id = %s
     """, (station_id,))
-    station = cursor.fetchone()
-    cursor.close()
+    station = cur.fetchone()
+    cur.close()
     conn.close()
     return station
 
-def get_places_by_station(station_id, activity=None, budget=None):
-    """Места у станции с фильтрацией"""
+
+def get_places_by_station(station_id, activity=None, budget=None, limit=30):
+    """
+    Возвращает места у станции.
+    activity и budget — фильтры (или None), limit — максимум записей.
+    """
     conn = get_db_connection()
-    cursor = conn.cursor(cursor_factory=RealDictCursor)
+    cur = conn.cursor(cursor_factory=RealDictCursor)
     
+    # Базовый запрос
     query = """
         SELECT name, place_type, walking_minutes, 
                activity_category, budget_category
@@ -52,30 +72,36 @@ def get_places_by_station(station_id, activity=None, budget=None):
     """
     params = [station_id]
     
-    if activity and activity != 'all':
+    if activity:
         query += " AND activity_category = %s"
         params.append(activity)
     
-    if budget and budget != 'all':
+    if budget:
         query += " AND budget_category = %s"
         params.append(budget)
     
-    query += " ORDER BY walking_minutes LIMIT 30"
+    query += " ORDER BY walking_minutes LIMIT %s"
+    params.append(limit)
     
-    cursor.execute(query, params)
-    places = cursor.fetchall()
-    cursor.close()
+    cur.execute(query, params)
+    places = cur.fetchall()
+    cur.close()
     conn.close()
     return places
 
+
 def get_stats():
-    """Общая статистика"""
+    
+    """Общее количество станций и мест"""    
     conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT COUNT(*) FROM stations")
-    stations = cursor.fetchone()[0]
-    cursor.execute("SELECT COUNT(*) FROM places")
-    places = cursor.fetchone()[0]
-    cursor.close()
+    cur = conn.cursor()
+    
+    cur.execute("SELECT COUNT(*) FROM stations")
+    stations_count = cur.fetchone()[0]
+    
+    cur.execute("SELECT COUNT(*) FROM places")
+    places_count = cur.fetchone()[0]
+    
+    cur.close()
     conn.close()
-    return stations, places
+    return stations_count, places_count
