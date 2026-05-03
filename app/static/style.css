@@ -1,313 +1,233 @@
 /* app/static/style.css */
-/* Все стили для веб-сайта МосМетро-Гид */
-
-/* ============================================================
-   ОБНУЛЕНИЕ СТАНДАРТНЫХ СТИЛЕЙ (CSS Reset)
-   Убираем отступы и поля, которые браузеры добавляют по умолчанию
-   ============================================================ */
+/* Стили для МосМетро-Гид */
 
 * {
-    margin: 0;              /* Убираем внешние отступы */
-    padding: 0;             /* Убираем внутренние отступы */
-    box-sizing: border-box; /* Удобная модель: padding не увеличивает ширину элемента */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-
-/* ============================================================
-   ОСНОВНЫЕ СТИЛИ ДЛЯ СТРАНИЦЫ
-   ============================================================ */
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    /* ^ Системный шрифт Apple/Windows/Android — выглядит как родной на любой платформе */
-    background: #f0f2f5;   /* Светло-серый фон (как в Facebook/Instagram) */
-    min-height: 100vh;      /* Минимальная высота = весь экран */
-    padding: 20px;          /* Отступы от краёв экрана */
+    background: #f0f2f5;
+    min-height: 100vh;
+    padding: 20px;
 }
-
-/* ============================================================
-   КОНТЕЙНЕР (ограничивает ширину контента)
-   ============================================================ */
 
 .container {
-    max-width: 1400px;      /* Максимальная ширина контента */
-    margin: 0 auto;         /* Центрируем контейнер по горизонтали */
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-/* ============================================================
-   ШАПКА СТРАНИЦЫ (заголовок, описание, статистика)
-   ============================================================ */
-
+/* Шапка */
 .header {
-    text-align: center;     /* Центрируем весь текст в шапке */
-    margin-bottom: 30px;    /* Отступ снизу */
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .header h1 {
-    font-size: 2.5em;       /* Размер шрифта: 2.5 × стандартный */
-    color: #1a1a2e;         /* Тёмно-синий цвет */
-    margin-bottom: 10px;    /* Отступ снизу */
-    letter-spacing: -0.5px; /* Немного уменьшаем расстояние между буквами */
+    font-size: 2.5em;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
 }
 
 .header p {
-    color: #666;            /* Серый цвет для подзаголовка */
-    font-size: 1.1em;       /* Немного крупнее стандартного */
-    margin-bottom: 15px;    /* Отступ снизу */
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 15px;
 }
 
-/* Стили для блока со статистикой */
 .stats {
-    background: white;      /* Белый фон */
-    border-radius: 20px;    /* Скруглённые углы */
-    padding: 10px 20px;     /* Внутренние отступы */
-    display: inline-block;  /* Блок занимает только нужную ширину */
-    font-size: 0.9em;       /* Размер шрифта */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Лёгкая тень */
-    color: #555;            /* Серый цвет текста */
+    background: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    display: inline-block;
+    font-size: 0.9em;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    color: #555;
 }
 
-/* ============================================================
-   СЕТКА С КАРТОЧКАМИ СТАНЦИЙ
-   ============================================================ */
-
+/* Сетка карточек */
 .stations-grid {
-    display: grid;                              /* CSS Grid — современная сетка */
+    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    /* ^ Автоматическое заполнение: 
-         - каждая карточка минимум 320px
-         - если места много — добавляются новые колонки
-         - на телефоне будет одна колонка
-    */
-    gap: 20px;                                  /* Расстояние между карточками */
-    margin-bottom: 30px;                        /* Отступ снизу */
+    gap: 20px;
+    margin-bottom: 30px;
 }
 
-/* ============================================================
-   КАРТОЧКА СТАНЦИИ
-   ============================================================ */
-
+/* Карточка станции */
 .station-card {
-    background: white;      /* Белый фон */
-    border-radius: 16px;    /* Скруглённые углы */
-    overflow: hidden;       /* Чтобы содержимое не вылезало за скруглённые углы */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Лёгкая тень */
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    /* ^ Плавное изменение свойств при наведении */
-    cursor: pointer;        /* Рука при наведении (означает, что кликабельно) */
+    cursor: pointer;
 }
 
-/* Эффект при наведении мыши */
 .station-card:hover {
-    transform: translateY(-4px);           /* Приподнимаем карточку */
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Усиливаем тень */
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Активная карточка (когда открыта) */
 .station-card.active {
-    border: 2px solid #667eea;  /* Сиреневая рамка */
+    border: 2px solid #667eea;
 }
 
-/* ============================================================
-   ВЕРХНЯЯ ЧАСТЬ КАРТОЧКИ (название станции, линия, количество мест)
-   ============================================================ */
-
+/* Цветная шапка карточки */
 .station-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    /* ^ Градиент от сиреневого к фиолетовому */
-    padding: 16px;          /* Внутренние отступы */
-    color: white;           /* Белый текст */
+    padding: 16px;
+    color: white;
 }
 
 .station-name {
-    font-size: 1.3em;       /* Крупнее стандартного */
-    font-weight: bold;      /* Жирное начертание */
-    margin-bottom: 6px;     /* Отступ снизу */
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
 .station-line {
-    font-size: 0.85em;      /* Мельче стандартного */
-    opacity: 0.9;           /* Немного прозрачнее */
-    margin-bottom: 8px;     /* Отступ снизу */
+    font-size: 0.85em;
+    opacity: 0.9;
+    margin-bottom: 8px;
 }
 
 .station-places-count {
-    background: rgba(255,255,255,0.2); /* Белый полупрозрачный фон */
-    border-radius: 20px;                /* Скруглённые углы */
-    padding: 4px 12px;                 /* Внутренние отступы */
-    font-size: 0.75em;                 /* Мелкий шрифт */
-    display: inline-block;             /* Блок по ширине содержимого */
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 0.75em;
+    display: inline-block;
 }
-
-/* ============================================================
-   ФАКТ О СТАНЦИИ
-   ============================================================ */
 
 .station-fact {
-    padding: 12px;          /* Внутренние отступы */
-    font-size: 0.85em;      /* Размер шрифта */
-    color: #555;            /* Серый цвет */
-    background: #f8f9fa;    /* Светло-серый фон */
-    border-bottom: 1px solid #eee; /* Тонкая серая линия снизу */
-    line-height: 1.4;       /* Высота строки (межстрочный интервал) */
+    padding: 12px;
+    font-size: 0.85em;
+    color: #555;
+    background: #f8f9fa;
+    border-bottom: 1px solid #eee;
+    line-height: 1.4;
 }
 
-/* ============================================================
-   РАСКРЫВАЮЩАЯСЯ ЧАСТЬ (детали станции)
-   ============================================================ */
-
+/* Раскрывающаяся часть */
 .station-details {
-    display: none;          /* Скрыта по умолчанию */
+    display: none;
     border-top: 1px solid #eee;
     background: white;
 }
 
-/* Показываем, когда есть класс .show */
 .station-details.show {
     display: block;
 }
 
-/* ============================================================
-   ФИЛЬТРЫ (кнопки для сортировки по активности и бюджету)
-   ============================================================ */
-
+/* Фильтры */
 .filters {
-    padding: 12px;          /* Внутренние отступы */
-    background: #f8f9fa;    /* Светло-серый фон */
+    padding: 12px;
+    background: #f8f9fa;
     border-bottom: 1px solid #eee;
 }
 
 .filter-group {
-    display: flex;          /* Flexbox для горизонтального расположения */
-    flex-wrap: wrap;        /* Если не влезают — переносим на новую строку */
-    gap: 8px;               /* Расстояние между элементами */
-    margin-bottom: 10px;    /* Отступ снизу */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
 }
 
-/* Метка группы фильтров */
 .filter-group span {
     font-size: 0.9em;
-    line-height: 28px;      /* Выравниваем по высоте кнопок */
+    line-height: 28px;
     margin-right: 4px;
 }
 
-/* Кнопка фильтра */
 .filter-btn {
-    background: #e9ecef;     /* Светло-серый фон */
-    border: none;            /* Убираем стандартную рамку */
-    padding: 6px 14px;       /* Внутренние отступы */
-    border-radius: 25px;     /* Круглые кнопки */
-    font-size: 0.8em;        /* Размер шрифта */
-    cursor: pointer;         /* Рука при наведении */
-    transition: all 0.2s;    /* Плавное изменение свойств */
-    color: #333;             /* Цвет текста */
+    background: #e9ecef;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 25px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: #333;
 }
 
-/* Эффект при наведении на кнопку */
 .filter-btn:hover {
-    background: #dee2e6;     /* Немного темнее */
+    background: #dee2e6;
 }
 
-/* Активная кнопка (выбранный фильтр) */
 .filter-btn.active {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    /* ^ Такой же градиент, как в шапке карточки */
     color: white;
 }
 
-/* ============================================================
-   СПИСОК МЕСТ
-   ============================================================ */
-
+/* Список мест */
 .places-list {
-    padding: 12px;               /* Внутренние отступы */
-    max-height: 400px;          /* Максимальная высота (если больше — скролл) */
-    overflow-y: auto;           /* Вертикальный скролл при необходимости */
+    padding: 12px;
+    max-height: 400px;
+    overflow-y: auto;
 }
 
-/* Одно место в списке */
 .place-item {
-    padding: 12px 0;            /* Вертикальные отступы */
-    border-bottom: 1px solid #eee; /* Серая линия разделитель */
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
 }
 
-/* У последнего элемента убираем линию */
 .place-item:last-child {
     border-bottom: none;
 }
 
-/* Название места */
 .place-name {
-    font-weight: 600;           /* Жирное, но не очень */
-    color: #333;                /* Тёмно-серый */
+    font-weight: 600;
+    color: #333;
     font-size: 0.95em;
-    margin-bottom: 6px;         /* Отступ снизу */
+    margin-bottom: 6px;
 }
 
-/* Тип места (кафе, музей, парк...) */
 .place-type {
     font-size: 0.75em;
     color: #888;
     margin-left: 8px;
 }
 
-/* Блок с дополнительной информацией (время, бюджет, активность) */
 .place-info {
-    display: flex;              /* Горизонтальное расположение */
-    flex-wrap: wrap;            /* Перенос на новую строку при необходимости */
-    gap: 8px;                   /* Расстояние между элементами */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
     font-size: 0.75em;
 }
 
-/* Расстояние пешком */
 .place-distance {
-    background: #e9ecef;        /* Светло-серый фон */
-    padding: 4px 10px;          /* Внутренние отступы */
-    border-radius: 20px;        /* Скруглённые углы */
+    background: #e9ecef;
+    padding: 4px 10px;
+    border-radius: 20px;
     color: #333;
 }
 
-/* ============================================================
-   ЦВЕТНЫЕ БЕЙДЖИ (для бюджета и активности)
-   ============================================================ */
-
+/* Цветные метки */
 .badge {
-    padding: 4px 10px;           /* Внутренние отступы */
-    border-radius: 20px;         /* Скруглённые углы */
+    padding: 4px 10px;
+    border-radius: 20px;
     font-size: 0.75em;
 }
 
-/* Бейджи для бюджета */
-.badge-free { background: #d4edda; color: #155724; }     /* Бесплатно — зелёный */
-.badge-cheap { background: #fff3cd; color: #856404; }    /* Дёшево — жёлтый */
-.badge-medium { background: #cce5ff; color: #004085; }   /* Средний — синий */
-.badge-expensive { background: #f8d7da; color: #721c24; } /* Дорого — красный */
+.badge-free { background: #d4edda; color: #155724; }
+.badge-cheap { background: #fff3cd; color: #856404; }
+.badge-medium { background: #cce5ff; color: #004085; }
+.badge-expensive { background: #f8d7da; color: #721c24; }
 
-/* Бейджи для активности */
-.badge-eat { background: #fce4d6; color: #333; }    /* Еда — персиковый */
-.badge-see { background: #e2d1ff; color: #333; }    /* Смотреть — фиолетовый */
-.badge-walk { background: #d1ecf1; color: #333; }   /* Гулять — голубой */
+.badge-eat { background: #fce4d6; color: #333; }
+.badge-see { background: #e2d1ff; color: #333; }
+.badge-walk { background: #d1ecf1; color: #333; }
 
-/* ============================================================
-   СОСТОЯНИЕ ЗАГРУЗКИ И ПУСТЫЕ СОСТОЯНИЯ
-   ============================================================ */
-
-.loading {
+/* Пустые состояния */
+.loading, .no-places {
     text-align: center;
     color: #999;
     padding: 30px;
     font-style: italic;
 }
-
-.no-places {
-    text-align: center;
-    color: #999;
-    padding: 30px;
-    font-style: italic;
-}
-
-/* ============================================================
-   ПОДВАЛ СТРАНИЦЫ
-   ============================================================ */
 
 .footer {
     text-align: center;
@@ -318,47 +238,17 @@ body {
     margin-top: 20px;
 }
 
-/* ============================================================
-   АДАПТАЦИЯ ПОД МОБИЛЬНЫЕ УСТРОЙСТВА (телефоны)
-   ============================================================ */
-
+/* Мобильные устройства */
 @media (max-width: 768px) {
-    /* На экранах шириной меньше 768px (телефоны) */
-    
-    body {
-        padding: 10px;      /* Уменьшаем отступы */
-    }
-    
-    .stations-grid {
-        grid-template-columns: 1fr;  /* Одна колонка вместо нескольких */
-        gap: 15px;                   /* Уменьшаем расстояние между карточками */
-    }
-    
-    .header h1 {
-        font-size: 1.8em;   /* Уменьшаем заголовок */
-    }
-    
-    .station-name {
-        font-size: 1.1em;   /* Уменьшаем название станции */
-    }
-    
-    .filter-btn {
-        padding: 4px 10px;   /* Уменьшаем кнопки */
-        font-size: 0.7em;
-    }
-    
-    .stats {
-        font-size: 0.8em;    /* Уменьшаем статистику */
-        padding: 6px 12px;
-    }
+    body { padding: 10px; }
+    .stations-grid { grid-template-columns: 1fr; gap: 15px; }
+    .header h1 { font-size: 1.8em; }
+    .station-name { font-size: 1.1em; }
+    .filter-btn { padding: 4px 10px; font-size: 0.7em; }
+    .stats { font-size: 0.8em; padding: 6px 12px; }
 }
 
-/* ============================================================
-   АДАПТАЦИЯ ПОД ПЛАНШЕТЫ
-   ============================================================ */
-
+/* Планшеты */
 @media (min-width: 769px) and (max-width: 1024px) {
-    .stations-grid {
-        grid-template-columns: repeat(2, 1fr); /* Две колонки на планшетах */
-    }
+    .stations-grid { grid-template-columns: repeat(2, 1fr); }
 }
