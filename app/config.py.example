@@ -6,10 +6,10 @@ cat > app/config.py.example <<'EOF'
 DB_CONFIG = {
     "dbname": "moscow_metro",
     "user": "postgres",
-    "password": "ЗАМЕНИТЕ_НА_ВАШ_ПАРОЛЬ",  # ← Вставьте свой пароль
+    "password": "ВАШ_ПАРОЛЬ",  # ← Вставьте свой пароль
     "host": "localhost",
     "port": 5432
 }
 
-SECRET_KEY = "ЗАМЕНИТЕ_НА_СЛУЧАЙНУЮ_СТРОКУ"  # ← Придумайте секретный ключ
+SECRET_KEY = "СГЕНЕРИРУЙТЕ_СЛУЧАЙНУЮ_СТРОКУ"  # ← Придумайте секретный ключ
 EOF
