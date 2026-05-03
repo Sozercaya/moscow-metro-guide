@@ -1,0 +1,62 @@
+<!-- app/templates/index.html -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>МосМетро-Гид</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚇 МосМетро-Гид</h1>
+            <p>Путеводитель по Москве через станции метро</p>
+            <div class="stats">
+                📍 {{ stations_count }} станций | 🏛️ {{ places_count }} мест
+            </div>
+        </div>
+        
+        <div class="stations-grid">
+            {% for station in stations %}
+            <div class="station-card" data-id="{{ station.id }}">
+                <div class="station-header">
+                    <div class="station-name">{{ station.name }}</div>
+                    <div class="station-line">{{ station.line_name }}</div>
+                    <div class="station-places-count" id="count-{{ station.id }}">⏳</div>
+                </div>
+                <div class="station-fact" id="fact-{{ station.id }}">📖 загрузка...</div>
+                <div class="station-details" id="details-{{ station.id }}">
+                    <div class="filters">
+                        <div class="filter-group">
+                            <span>🎯</span>
+                            <button class="filter-btn active" data-activity="all">Все</button>
+                            <button class="filter-btn" data-activity="есть">🍽️ Есть</button>
+                            <button class="filter-btn" data-activity="смотреть">👀 Смотреть</button>
+                            <button class="filter-btn" data-activity="гулять">🚶 Гулять</button>
+                        </div>
+                        <div class="filter-group">
+                            <span>💰</span>
+                            <button class="filter-btn active" data-budget="all">Все</button>
+                            <button class="filter-btn" data-budget="бесплатно">🆓 Бесплатно</button>
+                            <button class="filter-btn" data-budget="дёшево">💸 Дёшево</button>
+                            <button class="filter-btn" data-budget="средний">💵 Средний</button>
+                            <button class="filter-btn" data-budget="дорого">💎 Дорого</button>
+                        </div>
+                    </div>
+                    <div class="places-list" id="places-{{ station.id }}">
+                        <div class="loading">Загрузка...</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="footer">
+            🚇 Данные: 250+ станций, 970+ достопримечательностей
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
