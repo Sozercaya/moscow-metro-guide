@@ -13,24 +13,24 @@
 
 \```
 moscow-metro-guide/
-├── app/                                 # 📦 Основное приложение Flask
-│   ├── __init__.py                      # 🏭 Фабрика приложений (create_app)
-│   ├── config.py.example                # ⚙️ Шаблон настроек (скопируйте в config.py)
-│   ├── models.py                        # 🗄️ Работа с базой данных (SQLAlchemy модели)
-│   ├── routes.py                        # 🚏 URL-маршруты и API эндпоинты
-│   ├── templates/                       # 🎨 HTML-шаблоны
-│   │   └── index.html                   # 🏠 Главная страница (список станций)
-│   └── static/                          # 📁 Статические файлы
-│       ├── style.css                    # 🎨 Стили и адаптивный дизайн
-│       └── script.js                    # ⚡ Клиентская логика (фильтры, API)
+├── app/                                 # Основное приложение Flask
+│   ├── __init__.py                      # Фабрика приложений (create_app)
+│   ├── config.py.example                # Шаблон настроек (скопируйте в config.py)
+│   ├── models.py                        # Работа с базой данных (чистые SQL-запросы (psycopg2))
+│   ├── routes.py                        # URL-маршруты и API эндпоинты
+│   ├── templates/                       # HTML-шаблоны
+│   │   └── index.html                   # Главная страница (список станций)
+│   └── static/                          # Статические файлы
+│       ├── style.css                    # Стили и адаптивный дизайн
+│       └── script.js                    # Клиентская логика (фильтры, API)
 │
-├── run.py                               # 🚀 Точка входа (запуск сервера)
-├── init_db.py                           # 💾 Загрузка данных в PostgreSQL
-├── stations.csv                         # 📊 Исходные данные (станции, линии, места)
-├── stations.json                        # 📄 Данные в JSON для веб-сайта
-├── requirements.txt                     # 📦 Зависимости Python (Flask, psycopg2)
-├── .gitignore                           # 🙈 Игнорируемые файлы (venv, config.py)
-└── README.md                            # 📖 Документация проекта
+├── run.py                               # Точка входа (запуск сервера)
+├── init_db.py                           # Загрузка данных в PostgreSQL
+├── stations.csv                         # Исходные данные (станции, линии, места)
+├── stations.json                        # Данные в JSON для веб-сайта
+├── requirements.txt                     # Зависимости Python (Flask, psycopg2)
+├── .gitignore                           # Игнорируемые файлы (venv, config.py)
+└── README.md                            # Документация проекта
 \```
 
 ## 🗄️ База данных
